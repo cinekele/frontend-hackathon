@@ -13,8 +13,8 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  public getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl);
+  public getBoss(): Observable<Employee> {
+    return this.http.get<Employee>(this.apiUrl);
   }
 
   public addEmployee(employee: Employee): Observable<Employee> {

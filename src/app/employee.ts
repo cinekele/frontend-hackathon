@@ -6,6 +6,6 @@ export interface Employee {
     phoneNumber: string;
     description: string;
     supervisor: Employee;
-    subordiantes: Employee[];
+    subordinates: Employee[];
     url: string;
 }
