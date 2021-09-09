@@ -25,31 +25,42 @@ export class TreeComponent implements OnInit {
   private getEmployees(): void {
     var tree: any = {
       chart: {
-        container: "#treant-id"
+        container: "#treant-id",
+        connectors: { type: "straight" },
+        node: { HTMLclass: "node" }
       },
       nodeStructure: {
       }
     };
     if (this.boss !== null && this.boss != undefined) {
       tree["nodeStructure"] = {
+        image: this.boss.url,
         text: {
-          name: this.boss.name,
-          lastName: this.boss.lastName  
+          id: "ID: " + this.boss.id,
+          name: this.boss.name + " " + this.boss.lastName,
+          email: this.boss.email == null ? "" : this.boss.email,
+          phoneNumber: this.boss.phoneNumber == null ? "" : this.boss.phoneNumber,
+          description: this.boss.description == null ? "" : this.boss.description 
         },
         children: []
       }
       this.boss.subordinates.forEach(x => {
         this.addChildren(tree["nodeStructure"]["children"], x);
       });
-      (() => { Treant(tree) })();
+      Treant(tree);
+      console.log(tree);
     }
   }
 
   private addChildren(tree: any, supervisor: Employee): void {
     let data = {
+      image: supervisor.url,
       text: {
-        name: supervisor.name,
-        lastName: supervisor.lastName,
+        id: "ID: " + supervisor.id,
+        name: supervisor.name + " " + supervisor.lastName,
+        email: supervisor.email == null ? "" : supervisor.email,
+          phoneNumber: supervisor.phoneNumber == null ? "" : supervisor.phoneNumber,
+          description: supervisor.description == null ? "" : supervisor.description         
       },
       children: []
     }
@@ -57,17 +68,6 @@ export class TreeComponent implements OnInit {
     supervisor.subordinates.forEach(x => {
       this.addChildren(data["children"], x);
     });
-  }
-
-  private setChildrens(supervisor: Employee): any {
-    let list: any[] = [];
-    supervisor.subordinates.forEach(x => {
-      list.push({
-        name: x.name,
-        lastName: x.lastName
-      })
-    })
-    return list;
   }
 
   public getBoss(): void {
@@ -86,7 +86,7 @@ export class TreeComponent implements OnInit {
     this.employeeService.addEmployee(addForm.value).subscribe(
       (response: Employee) => {
         console.log(response);
-        this.getEmployees();
+        this.getBoss();
         addForm.reset();
       },
       (error: HttpErrorResponse) => {
@@ -94,5 +94,22 @@ export class TreeComponent implements OnInit {
         addForm.reset();
       }
     );
+  }
+
+  public onDeleteEmployee(deleteForm: NgForm): void {
+    this.employeeService.deleteEmployee(deleteForm.value.id).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getBoss();
+        deleteForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onDownloadCSV(): void {
+    this.employeeService.downloadCSV();
   }
 }

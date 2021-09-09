@@ -5,7 +5,7 @@ export interface Employee {
     email: string;
     phoneNumber: string;
     description: string;
-    supervisor: Employee;
+    supervisorId: number;
     subordinates: Employee[];
     url: string;
 }

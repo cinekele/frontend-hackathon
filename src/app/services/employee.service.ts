@@ -20,4 +20,12 @@ export class EmployeeService {
   public addEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.apiUrl, employee);
   }
+
+  public deleteEmployee(id: number): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + "/" + id);
+  }
+
+  public downloadCSV(): void {
+    this.http.get(this.apiUrl + "/export/csv");
+  }
 }

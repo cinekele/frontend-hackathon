@@ -7,9 +7,9 @@ h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
 q:before,q:after { content:''; }
 abbr,acronym { border:0; }
 
-body { background: #fff; }
+body { background: linear-gradient(90deg, #2193b0, #6dd5ed);}
 /* optional Container STYLES */
-.chart { height: 600px; margin: 5px; width: 900px; }
+.chart { height: 600px; margin: 5px;}
 .Treant > .node {  }
 .Treant > p { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: bold; font-size: 12px; }
 .node-name { font-weight: bold;}
@@ -34,10 +34,97 @@ body { background: #fff; }
 /* .Treant se automatski dodaje na svaki chart conatiner */
 .Treant { position: relative; overflow: hidden; padding: 0 !important; }
 .Treant > .node,
-.Treant > .pseudo { position: absolute; display: block; visibility: hidden; }
+.Treant > .pseudo { position: absolute; visibility: hidden; }
 .Treant.Treant-loaded .node,
 .Treant.Treant-loaded .pseudo { visibility: visible; }
 .Treant > .pseudo { width: 0; height: 0; border: none; padding: 0; }
 .Treant .collapse-switch { width: 3px; height: 3px; display: block; border: 1px solid black; position: absolute; top: 1px; right: 1px; cursor: pointer; }
 .Treant .collapsed .collapse-switch { background-color: #868DEE; }
 .Treant > .node img {	border: none; float: left; }
+
+.node {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+img {
+    flex: 1;
+    max-width: 80px;
+}
+
+.myForm {
+    clear: both;
+    width: fit-content;
+    float: right;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}    
+    
+    form {
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.7); 
+    }
+    .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bolder;
+    }
+    input {
+    padding: 5px;
+    margin-bottom: 30px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #eee;
+    outline: none;
+    color: white;
+    }
+    input::placeholder {
+    color: #eee;
+    }
+    option:focus {
+    border: none;
+    }
+    
+    button {
+    padding: 10px 5px;
+    border-radius: 5px; 
+    border: none;
+    background: #4a4e69; 
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    }
+
+    
+    button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    }
+
+    button:hover:enabled {
+        background: #85d6de;
+        cursor: pointer;
+    }
+    
+    button {
+    width: 100%;
+    }
+    .download {
+        padding: 20px;
+        width: fit-content;
+        margin-top: 20px;
+    }
+    
