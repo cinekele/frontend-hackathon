@@ -37,7 +37,7 @@ export class TreeComponent implements OnInit {
         image: this.boss.url,
         text: {
           id: "ID: " + this.boss.id,
-          name: this.boss.name + " " + this.boss.lastName,
+          name: this.boss.name.concat(" ", this.boss.lastName == null ? "" : this.boss.lastName),
           email: this.boss.email == null ? "" : this.boss.email,
           phoneNumber: this.boss.phoneNumber == null ? "" : this.boss.phoneNumber,
           description: this.boss.description == null ? "" : this.boss.description 
@@ -57,7 +57,7 @@ export class TreeComponent implements OnInit {
       image: supervisor.url,
       text: {
         id: "ID: " + supervisor.id,
-        name: supervisor.name + " " + supervisor.lastName,
+        name: supervisor.name.concat(" ", supervisor.lastName == null ? "" : supervisor.lastName),
         email: supervisor.email == null ? "" : supervisor.email,
           phoneNumber: supervisor.phoneNumber == null ? "" : supervisor.phoneNumber,
           description: supervisor.description == null ? "" : supervisor.description         
@@ -104,12 +104,20 @@ export class TreeComponent implements OnInit {
         deleteForm.reset();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert("Employee with id " + deleteForm.value.id + " doesnt exists");
+        console.log(error.message);
       }
     );
   }
 
   public onDownloadCSV(): void {
-    this.employeeService.downloadCSV();
+    this.employeeService.downloadCSV().subscribe(
+      (response: void) => {
+        console.log(response);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 }

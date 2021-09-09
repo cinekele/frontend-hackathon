@@ -25,7 +25,7 @@ export class EmployeeService {
     return this.http.delete<void>(this.apiUrl + "/" + id);
   }
 
-  public downloadCSV(): void {
-    this.http.get(this.apiUrl + "/export/csv");
+  public downloadCSV(): Observable<void> {
+    return this.http.get<void>(this.apiUrl + "/export/csv");
   }
 }
