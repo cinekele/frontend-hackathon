@@ -77,7 +77,7 @@ export class TreeComponent implements OnInit {
         this.getEmployees();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }
@@ -104,7 +104,7 @@ export class TreeComponent implements OnInit {
         deleteForm.reset();
       },
       (error: HttpErrorResponse) => {
-        alert("Employee with id " + deleteForm.value.id + " doesnt exists");
+        alert("Employee with id " + deleteForm.value.id + " doesnt exists or has subordinates");
         console.log(error.message);
       }
     );
